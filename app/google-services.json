@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "433386706460",
+    "firebase_url": "https://financial-management-app-9eb1c-default-rtdb.firebaseio.com",
     "project_id": "financial-management-app-9eb1c",
     "storage_bucket": "financial-management-app-9eb1c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:433386706460:android:011c0680944307b49cb1d9",
+        "mobilesdk_app_id": "1:433386706460:android:8882d79ab70db91a9cb1d9",
         "android_client_info": {
           "package_name": "com.example.dontspendtoomuch"
         }
