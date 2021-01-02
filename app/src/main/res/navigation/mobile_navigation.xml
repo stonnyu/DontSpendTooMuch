@@ -22,4 +22,13 @@
         android:name="com.example.dontspendtoomuch.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.dontspendtoomuch.ui.home.CategoryFragment"
+        android:label="CategoryFragment" />
+    <fragment
+        android:id="@+id/addSpendingFragment"
+        android:name="com.example.dontspendtoomuch.ui.home.AddSpendingFragment"
+        android:label="AddSpendingFragment"
+        />
 </navigation>
