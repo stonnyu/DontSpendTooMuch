@@ -43,9 +43,9 @@ class AddSpendingFragment : Fragment() {
 
         binding.btnAddSpending.setOnClickListener {
             val alertDialog = AlertDialog.Builder(requireContext())
-            alertDialog.setMessage("warning")
-            alertDialog.setNegativeButton("no") { _, _ -> }
-            alertDialog.setPositiveButton("yes") { _, _ ->
+            alertDialog.setMessage("Are you sure you want to add this spending?")
+            alertDialog.setNegativeButton("Cancel") { _, _ -> }
+            alertDialog.setPositiveButton("Confirm") { _, _ ->
                 addSpending()
                 findNavController().navigate(R.id.navigation_home)
             }
