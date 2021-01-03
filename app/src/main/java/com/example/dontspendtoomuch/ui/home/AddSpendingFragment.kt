@@ -65,6 +65,7 @@ class AddSpendingFragment : Fragment() {
         newSpending.child("spendingTitle").setValue(spending.spendingTitle)
         newSpending.child("spendingDate").setValue(spending.spendingDate)
         newSpending.child("spendingAmount").setValue(spending.spendingAmount)
+        newSpending.child("spendingCategory").setValue(category)
 
         newCategorySpending = database
                 .getReference("Category")
