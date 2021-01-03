@@ -8,4 +8,5 @@
     <string name="hint_month">Month</string>
     <string name="hint_year">Year</string>
     <string name="hint_amount">Amount</string>
+    <string name="btn_add">add</string>
 </resources>
