@@ -20,6 +20,7 @@ class CategoryFragment : Fragment(), Observer {
     private lateinit var binding: FragmentCategoryBinding
     private var spendings = arrayListOf<Spending>()
     private var spendingAdapter = SpendingAdapter(spendings)
+    private var spendingAmountSum : Double = 0.0
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +48,7 @@ class CategoryFragment : Fragment(), Observer {
         binding.rvSpendings.adapter = spendingAdapter
 
         loadSpendings()
+        binding.tvTotalSpendingAmount.text = String.format("Total: %s", spendingAmountSum.toString())
     }
 
     private fun loadSpendings() {
@@ -55,6 +57,7 @@ class CategoryFragment : Fragment(), Observer {
 
         for (spending in spendingsData) {
             if (spending.spendingCategory == categoryTitle) {
+                spendingAmountSum += spending.spendingAmount
                 spendings.add(spending)
             }
         }
