@@ -9,17 +9,17 @@ import com.example.dontspendtoomuch.R
 import com.example.dontspendtoomuch.databinding.ItemSpendingBinding
 
 class SpendingAdapter(
-    private val spendings: List<Spending>,
-    private val clickListener: (Spending) -> Unit
+    private val spendings: List<Spending>
 ) :
     RecyclerView.Adapter<SpendingAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val binding = ItemSpendingBinding.bind(itemView)
 
-        fun databind(spending: Spending, clickListener: (Spending) -> Unit) {
+        fun databind(spending: Spending) {
             binding.tvSpendingTitle.text = spending.spendingTitle
-            itemView.setOnClickListener { clickListener(spending) }
+            binding.tvSpendingDate.text = spending.spendingDate.toString()
+            binding.tvSpendingAmount.text = String.format("€%s", spending.spendingAmount.toString())
 
         }
     }
@@ -48,6 +48,6 @@ class SpendingAdapter(
      * Called by RecyclerView to display the data at the specified position.
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.databind(spendings[position], clickListener)
+        holder.databind(spendings[position])
     }
 }

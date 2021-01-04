@@ -74,12 +74,12 @@ class AddSpendingFragment : Fragment() {
         newCategorySpending.child(newSpending.key.toString()).setValue(spending.spendingTitle)
     }
 
-    private fun dateInputFormat(): Date {
+    private fun dateInputFormat(): Long {
         val dateString: String = binding.tilSpendingDay.editText?.text.toString() +
                 binding.tilSpendingMonth.editText?.text.toString() +
                 binding.tilSpendingYear.editText?.text.toString()
 
-        return SimpleDateFormat("dMyyyy").parse(dateString)
+        return SimpleDateFormat("dMyyyy").parse(dateString).time
     }
 
     private fun loadSpinner() {
