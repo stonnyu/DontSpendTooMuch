@@ -22,7 +22,9 @@ class SpendingAdapter(
         fun databind(spending: Spending) {
             binding.tvSpendingTitle.text = spending.spendingTitle
             binding.tvSpendingDate.text = simpleDateFormat.format(spending.spendingDate)
-            binding.tvSpendingAmount.text = String.format("€%s", spending.spendingAmount.toString())
+            binding.tvSpendingAmount.text = String.format("€%.2f", spending.spendingAmount.toString()
+                .toDouble())
+                .replace(".", ",")
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.dontspendtoomuch.ui.home
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +15,9 @@ import com.example.dontspendtoomuch.DataModel.CategoryModel
 import com.example.dontspendtoomuch.DataModel.Spending
 import com.example.dontspendtoomuch.R
 import com.example.dontspendtoomuch.databinding.FragmentAddSpendingBinding
-import com.example.dontspendtoomuch.databinding.FragmentCategoryBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
-import java.util.*
 
 private const val TAG: String = "AddSpendingFragment"
 
@@ -30,8 +29,8 @@ class AddSpendingFragment : Fragment() {
     private var category: String? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?,
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentAddSpendingBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -40,6 +39,8 @@ class AddSpendingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadSpinner()
+
+        binding.etSpendingTitle.setMovementMethod(ScrollingMovementMethod())
 
         binding.btnAddSpending.setOnClickListener {
             val alertDialog = AlertDialog.Builder(requireContext())
@@ -88,15 +89,15 @@ class AddSpendingFragment : Fragment() {
         val categories = CategoryModel.getData()!!
 
         dynamicSpinner.adapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_dropdown_item,
-                categories
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            categories
         )
 
         dynamicSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                    parent: AdapterView<*>, view: View,
-                    position: Int, id: Long,
+                parent: AdapterView<*>, view: View,
+                position: Int, id: Long,
             ) {
                 category = parent.getItemAtPosition(position).toString()
             }

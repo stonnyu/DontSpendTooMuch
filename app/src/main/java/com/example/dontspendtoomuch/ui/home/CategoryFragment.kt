@@ -48,7 +48,10 @@ class CategoryFragment : Fragment(), Observer {
         binding.rvSpendings.adapter = spendingAdapter
 
         loadSpendings()
-        binding.tvTotalSpendingAmount.text = String.format("Total: %s", spendingAmountSum.toString())
+        binding.tvTotalSpendingAmount.text = String
+            .format("Total: €%.2f", spendingAmountSum.toString()
+            .toDouble())
+            .replace(".", ",")
     }
 
     private fun loadSpendings() {
