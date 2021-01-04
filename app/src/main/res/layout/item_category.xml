@@ -22,7 +22,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="left"
             android:paddingEnd="40dp"
             android:text="TextView"
             android:textSize="24sp"
