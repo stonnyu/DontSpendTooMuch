@@ -16,10 +16,6 @@ object CategoryModel : Observable() {
     }
 
     init {
-        reset()
-    }
-
-    fun reset() {
         if (mValueDataListener != null) {
             getDatabaseRef()?.removeEventListener(mValueDataListener!!)
         }
@@ -56,19 +52,6 @@ object CategoryModel : Observable() {
             }
         }
         getDatabaseRef()?.addValueEventListener(mValueDataListener as ValueEventListener)
-    }
-
-    /**
-     * Get an article
-     * @param id The id of a possible article
-     * @return if an article is found return the article else return null
-     */
-    fun getCategory(id: String): Category {
-        for(category in mCategoryList!!){
-            if(category.id == id)
-                return category
-        }
-        return Category(null)
     }
 
     fun getData() : ArrayList<Category>? {

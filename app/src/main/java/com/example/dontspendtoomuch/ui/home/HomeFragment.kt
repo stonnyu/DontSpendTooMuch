@@ -1,6 +1,8 @@
 package com.example.dontspendtoomuch.ui.home
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dontspendtoomuch.Adapters.CategoryAdapter
 import com.example.dontspendtoomuch.DataModel.Category
 import com.example.dontspendtoomuch.DataModel.CategoryModel
+import com.example.dontspendtoomuch.DataModel.SpendingModel
 import com.example.dontspendtoomuch.R
 import com.example.dontspendtoomuch.databinding.FragmentHomeBinding
 import java.util.*
@@ -71,8 +74,23 @@ class HomeFragment : Fragment(), Observer {
 
     private fun onClickCategory(portal: Category) {
         val args = Bundle()
+        var hasSpendings: Boolean = false
+        val spendingsData = SpendingModel.getData()!!
         args.putString(ARG_SPENDING_TITLE, portal.categoryTitle)
 
-        findNavController().navigate(R.id.categoryFragment)
+        for (spending in spendingsData) {
+            if (spending.spendingCategory == portal.categoryTitle) {
+                hasSpendings = true
+            }
+        }
+
+        if (hasSpendings) {
+            findNavController().navigate(R.id.categoryFragment, args)
+        } else {
+            val alertDialog = AlertDialog.Builder(requireContext())
+            alertDialog.setMessage("This category has no spendings.")
+            alertDialog.setNegativeButton("Ok") { _, _ -> }
+            alertDialog.create().show()
+        }
     }
 }

@@ -16,10 +16,6 @@ object SpendingModel : Observable() {
     }
 
     init {
-        reset()
-    }
-
-    fun reset() {
         if (mValueDataListener != null) {
             getDatabaseRef()?.removeEventListener(mValueDataListener!!)
         }
@@ -56,19 +52,6 @@ object SpendingModel : Observable() {
             }
         }
         getDatabaseRef()?.addValueEventListener(mValueDataListener as ValueEventListener)
-    }
-
-    /**
-     * Get an article
-     * @param id The id of a possible article
-     * @return if an article is found return the article else return null
-     */
-    fun getSpending(id: String): Spending {
-        for(spending in mSpendingList!!){
-            if(spending.id == id)
-                return spending
-        }
-        return Spending(null)
     }
 
     fun getData() : ArrayList<Spending>? {
