@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dontspendtoomuch.DataModel.Spending
 import com.example.dontspendtoomuch.R
 import com.example.dontspendtoomuch.databinding.ItemSpendingBinding
+import java.text.SimpleDateFormat
 
 class SpendingAdapter(
     private val spendings: List<Spending>
@@ -15,12 +16,13 @@ class SpendingAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val binding = ItemSpendingBinding.bind(itemView)
+        private val datePattern = "d MMMM yyyy"
+        var simpleDateFormat = SimpleDateFormat(datePattern)
 
         fun databind(spending: Spending) {
             binding.tvSpendingTitle.text = spending.spendingTitle
-            binding.tvSpendingDate.text = spending.spendingDate.toString()
+            binding.tvSpendingDate.text = simpleDateFormat.format(spending.spendingDate)
             binding.tvSpendingAmount.text = String.format("€%s", spending.spendingAmount.toString())
-
         }
     }
 

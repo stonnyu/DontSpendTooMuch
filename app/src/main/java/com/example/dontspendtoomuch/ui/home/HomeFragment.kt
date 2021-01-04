@@ -56,6 +56,7 @@ class HomeFragment : Fragment(), Observer {
         )
         binding.rvCategories.adapter = categoryAdapter
         this@HomeFragment.categories.clear()
+        SpendingModel.getData()!!
         categories.addAll(CategoryModel.getData()!!)
         categoryAdapter.notifyDataSetChanged()
     }
