@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -15,6 +15,7 @@ import com.example.dontspendtoomuch.DataModel.Spending
 import com.example.dontspendtoomuch.DataModel.SpendingModel
 import com.example.dontspendtoomuch.R
 import com.example.dontspendtoomuch.databinding.FragmentCategoryBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 
@@ -55,7 +56,7 @@ class CategoryFragment : Fragment(), Observer {
         loadSpendings()
         binding.tvTotalSpendingAmount.text = String
             .format("Total: €%.2f", spendingAmountSum.toString()
-            .toDouble())
+                    .toDouble())
             .replace(".", ",")
 
         createItemTouchHelper().attachToRecyclerView(binding.rvSpendings)
@@ -94,9 +95,9 @@ class CategoryFragment : Fragment(), Observer {
     private fun createItemTouchHelper(): ItemTouchHelper {
         val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
             ): Boolean {
                 return false
             }
@@ -124,9 +125,11 @@ class CategoryFragment : Fragment(), Observer {
                 initViews()
 
                 // Show system feedback of deletion
-                Toast.makeText(context,
-                    getString(R.string.delete_spending_toast),
-                    Toast.LENGTH_SHORT).show()
+                val snackbar = Snackbar.make(
+                        view!!,
+                        getString(R.string.delete_spending_toast),
+                        Snackbar.LENGTH_SHORT)
+                snackbar.show()
                 
                 findNavController().navigate(R.id.navigation_home)
             }

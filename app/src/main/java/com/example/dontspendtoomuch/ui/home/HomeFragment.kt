@@ -60,6 +60,9 @@ class HomeFragment : Fragment(), Observer {
         categoryAdapter.notifyDataSetChanged()
     }
 
+    /**
+     * Updates categories recyclerview when data is changed
+     */
     override fun update(p0: Observable?, p1: Any?) {
         this@HomeFragment.categories.clear()
 
