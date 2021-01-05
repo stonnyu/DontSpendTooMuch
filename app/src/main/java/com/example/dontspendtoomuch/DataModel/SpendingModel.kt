@@ -4,12 +4,14 @@ import android.util.Log
 import com.google.firebase.database.*
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 private const val TAG: String = "SpendingModel"
 
 object SpendingModel : Observable() {
     private var mValueDataListener: ValueEventListener? = null
     private var mSpendingList: ArrayList<Spending>? = ArrayList()
+    private val mSpendingsIdMap : HashMap<String, String>  = hashMapOf()
 
     private fun getDatabaseRef() : DatabaseReference? {
         return FirebaseDatabase.getInstance().reference.child("Spending")
@@ -28,7 +30,9 @@ object SpendingModel : Observable() {
                     if (dataSnapshot != null) {
                         for (snapshot: DataSnapshot in dataSnapshot.children) {
                             try {
-                                data.add(Spending(snapshot))
+                                var spending = Spending(snapshot)
+                                data.add(spending)
+                                mSpendingsIdMap.put(spending.spendingTitle, spending.id)
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }
@@ -49,6 +53,10 @@ object SpendingModel : Observable() {
             }
         }
         getDatabaseRef()?.addValueEventListener(mValueDataListener as ValueEventListener)
+    }
+
+    fun getIDs() : HashMap<String, String> {
+        return mSpendingsIdMap
     }
 
     fun getData() : ArrayList<Spending>? {
