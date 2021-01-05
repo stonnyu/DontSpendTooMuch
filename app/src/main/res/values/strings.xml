@@ -3,6 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_insight">Insight</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_add_spending">Add spending</string>
+    <string name="title_category">Spendings</string>
     <string name="hint_title">Title</string>
     <string name="hint_day">Day</string>
     <string name="hint_month">Month</string>

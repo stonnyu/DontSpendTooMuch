@@ -25,10 +25,9 @@
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.dontspendtoomuch.ui.home.CategoryFragment"
-        android:label="CategoryFragment" />
+        android:label="@string/title_category" />
     <fragment
         android:id="@+id/addSpendingFragment"
         android:name="com.example.dontspendtoomuch.ui.home.AddSpendingFragment"
-        android:label="AddSpendingFragment"
-        />
+        android:label="@string/title_add_spending" />
 </navigation>
