@@ -42,6 +42,7 @@ class InsightFragment : Fragment() {
         var dataEntries = arrayListOf<DataEntry>()
         var pieChart: Pie = AnyChart.pie()
 
+        // Keeps track of total spending sum of that category
         for (categories in categoriesData) {
             spendingAmountSum = 0.0
             for (spending in spendingsData) {
@@ -53,6 +54,7 @@ class InsightFragment : Fragment() {
             map.put(categories.categoryTitle, spendingAmountSum)
         }
 
+        // Fill pie chart with categories and total spending sum
         map.forEach {(key, value) ->
             dataEntries.add(ValueDataEntry(key, value))
         }

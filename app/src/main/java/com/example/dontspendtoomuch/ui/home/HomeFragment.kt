@@ -84,6 +84,7 @@ class HomeFragment : Fragment(), Observer {
             }
         }
 
+        // Shows user system feedback in case there are no spendings
         if (hasSpendings) {
             findNavController().navigate(R.id.categoryFragment, args)
         } else {

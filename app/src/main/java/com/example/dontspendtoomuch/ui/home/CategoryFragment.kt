@@ -1,9 +1,6 @@
 package com.example.dontspendtoomuch.ui.home
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,6 +61,9 @@ class CategoryFragment : Fragment(), Observer {
         createItemTouchHelper().attachToRecyclerView(binding.rvSpendings)
     }
 
+    /**
+     * Fills spendings recyclerview with spendings from the right category
+     */
     private fun loadSpendings() {
         val categoryTitle = arguments?.getString(ARG_SPENDING_TITLE)
         val spendingsData = SpendingModel.getData()!!
@@ -72,18 +72,25 @@ class CategoryFragment : Fragment(), Observer {
 
         for (spending in spendingsData) {
             if (spending.spendingCategory == categoryTitle) {
+                // Keeps track of total sum of spendings
                 spendingAmountSum += spending.spendingAmount
                 spendings.add(spending)
             }
         }
     }
 
+    /**
+     * Updates spendings recyclerview when data is changed
+     */
     override fun update(p0: Observable?, p1: Any?) {
         this@CategoryFragment.spendings.clear()
         loadSpendings()
         spendingAdapter.notifyDataSetChanged()
     }
 
+    /**
+     * Handles spending deletion on left swipes
+     */
     private fun createItemTouchHelper(): ItemTouchHelper {
         val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
@@ -102,9 +109,12 @@ class CategoryFragment : Fragment(), Observer {
 
                 val spendingIDs = SpendingModel.getIDs()
                 val database = FirebaseDatabase.getInstance()
+
+                // Removes from Spending table
                 database.getReference("Spending")
                     .child(spendingIDs.getValue(spending.spendingTitle)).removeValue()
 
+                // Removes from Category table
                 database.getReference("Category")
                     .child(spending.spendingCategory)
                     .child("spendings")
@@ -113,6 +123,7 @@ class CategoryFragment : Fragment(), Observer {
                 spendingAdapter.notifyDataSetChanged()
                 initViews()
 
+                // Show system feedback of deletion
                 Toast.makeText(context,
                     getString(R.string.delete_spending_toast),
                     Toast.LENGTH_SHORT).show()

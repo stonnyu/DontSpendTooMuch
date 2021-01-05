@@ -47,9 +47,9 @@ class AddSpendingFragment : Fragment() {
         loadSpinner()
         setupNumberPicker()
 
-        binding.etSpendingTitle.setMovementMethod(ScrollingMovementMethod())
-
         binding.btnAddSpending.setOnClickListener {
+
+            // Confirmation dialog to check if user wants to add this spending
             val alertDialog = AlertDialog.Builder(requireContext())
             alertDialog.setMessage(getString(R.string.add_spending_dialog))
             alertDialog.setNegativeButton(getString(R.string.add_spending_cancel)) { _, _ -> }
@@ -66,10 +66,12 @@ class AddSpendingFragment : Fragment() {
         val newCategorySpending: DatabaseReference
         val newSpending = spendingReference.child("").push()
 
+        // Gets user input
         spending.spendingTitle = binding.etSpendingTitle.text.toString()
         spending.spendingDate = dateInputFormat()
         spending.spendingAmount = binding.etSpendingAmount.text.toString().toDouble()
 
+        // Pushes user input to Spending table
         newSpending.child("spendingTitle").setValue(spending.spendingTitle)
         newSpending.child("spendingDate").setValue(spending.spendingDate)
         newSpending.child("spendingAmount").setValue(spending.spendingAmount)
@@ -79,9 +81,14 @@ class AddSpendingFragment : Fragment() {
                 .getReference("Category")
                 .child(category!!)
                 .child("spendings")
+
+        // Pushes user input to Category table
         newCategorySpending.child(newSpending.key.toString()).setValue(spending.spendingTitle)
     }
 
+    /**
+     * Formats user date input into timestamp
+     */
     private fun dateInputFormat(): Long {
         val dateString: String = binding.npDay.value.toString() + "-" +
                 binding.npMonth.value.toString() + "-" +
@@ -90,9 +97,11 @@ class AddSpendingFragment : Fragment() {
         return SimpleDateFormat(DATE_PATTERN).parse(dateString).time
     }
 
+    /**
+     * Fills the dropdown menu with categories
+     */
     private fun loadSpinner() {
         val dynamicSpinner = binding.dynamicSpinner
-
         val categories = CategoryModel.getData()!!
 
         dynamicSpinner.adapter = ArrayAdapter(
