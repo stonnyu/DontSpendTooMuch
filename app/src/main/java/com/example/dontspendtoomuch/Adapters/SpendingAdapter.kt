@@ -9,6 +9,9 @@ import com.example.dontspendtoomuch.R
 import com.example.dontspendtoomuch.databinding.ItemSpendingBinding
 import java.text.SimpleDateFormat
 
+
+private const val SPENDING_DATE_PATTERN = "d MMMM yyyy"
+
 class SpendingAdapter(
     private val spendings: List<Spending>
 ) :
@@ -16,8 +19,7 @@ class SpendingAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val binding = ItemSpendingBinding.bind(itemView)
-        private val datePattern = "d MMMM yyyy"
-        var simpleDateFormat = SimpleDateFormat(datePattern)
+        var simpleDateFormat = SimpleDateFormat(SPENDING_DATE_PATTERN)
 
         fun databind(spending: Spending) {
             binding.tvSpendingTitle.text = spending.spendingTitle

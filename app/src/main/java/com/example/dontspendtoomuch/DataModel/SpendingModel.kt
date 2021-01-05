@@ -48,7 +48,7 @@ object SpendingModel : Observable() {
 
             override fun onCancelled(p0: DatabaseError) {
                 if (p0 != null) {
-                    Log.i(TAG, "Line 47 data update cancelled, error = ${p0.message}")
+                    Log.i(TAG, "Line 51 data update cancelled, error = ${p0.message}")
                 }
             }
         }

@@ -2,7 +2,6 @@ package com.example.dontspendtoomuch.ui.home
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,8 +88,9 @@ class HomeFragment : Fragment(), Observer {
             findNavController().navigate(R.id.categoryFragment, args)
         } else {
             val alertDialog = AlertDialog.Builder(requireContext())
-            alertDialog.setMessage("This category has no spendings.")
-            alertDialog.setNegativeButton("Ok") { _, _ -> }
+            alertDialog.setMessage(getString(R.string.click_no_spendings_dialog))
+            alertDialog.setNegativeButton(getString(R.string.click_no_spendings_button_text)) {
+                    _, _ -> }
             alertDialog.create().show()
         }
     }

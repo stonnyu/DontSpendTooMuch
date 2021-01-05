@@ -20,6 +20,12 @@ import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 
 private const val TAG: String = "AddSpendingFragment"
+private const val MIN_VALUE: Int = 1
+private const val MIN_YEARS: Int = 2015
+private const val MAX_DAYS: Int = 31
+private const val MAX_MONTHS: Int = 12
+private const val MAX_YEARS: Int = 2025
+private const val DATE_PATTERN: String = "d-M-yyyy"
 
 class AddSpendingFragment : Fragment() {
 
@@ -39,14 +45,15 @@ class AddSpendingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadSpinner()
+        setupNumberPicker()
 
         binding.etSpendingTitle.setMovementMethod(ScrollingMovementMethod())
 
         binding.btnAddSpending.setOnClickListener {
             val alertDialog = AlertDialog.Builder(requireContext())
-            alertDialog.setMessage("Are you sure you want to add this spending?")
-            alertDialog.setNegativeButton("Cancel") { _, _ -> }
-            alertDialog.setPositiveButton("Confirm") { _, _ ->
+            alertDialog.setMessage(getString(R.string.add_spending_dialog))
+            alertDialog.setNegativeButton(getString(R.string.add_spending_cancel)) { _, _ -> }
+            alertDialog.setPositiveButton(getString(R.string.add_spending_confirm)) { _, _ ->
                 addSpending()
                 findNavController().navigate(R.id.navigation_home)
             }
@@ -76,11 +83,11 @@ class AddSpendingFragment : Fragment() {
     }
 
     private fun dateInputFormat(): Long {
-        val dateString: String = binding.tilSpendingDay.editText?.text.toString() +
-                binding.tilSpendingMonth.editText?.text.toString() +
-                binding.tilSpendingYear.editText?.text.toString()
+        val dateString: String = binding.npDay.value.toString() + "-" +
+                binding.npMonth.value.toString() + "-" +
+                binding.npYear.value.toString()
 
-        return SimpleDateFormat("dMyyyy").parse(dateString).time
+        return SimpleDateFormat(DATE_PATTERN).parse(dateString).time
     }
 
     private fun loadSpinner() {
@@ -106,5 +113,16 @@ class AddSpendingFragment : Fragment() {
                 Log.d(TAG, "No item selected in spinner.")
             }
         }
+    }
+
+    private fun setupNumberPicker() {
+        binding.npDay.minValue = MIN_VALUE
+        binding.npDay.maxValue = MAX_DAYS
+
+        binding.npMonth.minValue = MIN_VALUE
+        binding.npMonth.maxValue = MAX_MONTHS
+
+        binding.npYear.minValue = MIN_YEARS
+        binding.npYear.maxValue = MAX_YEARS
     }
 }

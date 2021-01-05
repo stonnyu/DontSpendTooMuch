@@ -10,4 +10,10 @@
     <string name="hint_amount">Amount</string>
     <string name="btn_add">add</string>
     <string name="insight_expenses">Expenses</string>
+    <string name="add_spending_dialog">Are you sure you want to add this spending?</string>
+    <string name="add_spending_cancel">Cancel</string>
+    <string name="add_spending_confirm">Confirm</string>
+    <string name="delete_spending_toast">Spending deleted.</string>
+    <string name="click_no_spendings_dialog">This category has no spendings.</string>
+    <string name="click_no_spendings_button_text">Ok</string>
 </resources>

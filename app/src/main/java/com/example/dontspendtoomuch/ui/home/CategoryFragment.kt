@@ -110,14 +110,13 @@ class CategoryFragment : Fragment(), Observer {
                     .child("spendings")
                     .child(spendingIDs.getValue(spending.spendingTitle)).removeValue()
 
-                for (item in spendingIDs!!) {
-                    Log.i("helpmijdan", spendingIDs.toString())
-                }
-
                 spendingAdapter.notifyDataSetChanged()
                 initViews()
 
-                Toast.makeText(context, "Spending deleted.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,
+                    getString(R.string.delete_spending_toast),
+                    Toast.LENGTH_SHORT).show()
+                
                 findNavController().navigate(R.id.navigation_home)
             }
         }

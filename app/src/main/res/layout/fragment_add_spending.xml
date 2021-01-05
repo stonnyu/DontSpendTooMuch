@@ -16,14 +16,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="50dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -64,58 +62,32 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
                     android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilSpendingDay"
-                        android:layout_width="136dp"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_day"
-                        android:padding="16dp">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etSpendingDay"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:boxBackgroundColor="@android:color/transparent"
-                            android:background="@android:color/transparent"
-                            android:inputType="number"
-                            android:maxLength="2" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                    <NumberPicker
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:id="@+id/npDay"/>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilSpendingMonth"
-                        android:layout_width="136dp"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_month"
-                        android:padding="16dp">
+                    <NumberPicker
+                        android:id="@+id/npMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        android:layout_margin="15dp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etSpendingMonth"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:boxBackgroundColor="@android:color/transparent"
-                            android:background="@android:color/transparent"
-                            android:inputType="number"
-                            android:maxLength="2" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                    <NumberPicker
+                        android:layout_width="wrap_content"
+                        android:layout_height="120dp"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:id="@+id/npYear"/>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilSpendingYear"
-                        android:layout_width="136dp"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_year"
-                        android:padding="16dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etSpendingYear"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:boxBackgroundColor="@android:color/transparent"
-                            android:background="@android:color/transparent"
-                            android:inputType="number"
-                            android:maxLength="4" />
-                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -139,7 +111,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_margin="18dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="18dp"
                     android:text="@string/btn_add" />
 
             </LinearLayout>
